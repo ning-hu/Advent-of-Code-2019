@@ -15,7 +15,7 @@ func check(e error) {
 
 func main() {
 
-	file, err := os.Open("./input.txt")
+	file, err := os.Open("input.txt")
 	check(err)
 	defer file.Close()
 
