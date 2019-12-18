@@ -14,7 +14,6 @@ func check(e error) {
 }
 
 func main() {
-
 	buf, err := ioutil.ReadFile("input.txt")
 	check(err)
 
@@ -61,6 +60,7 @@ func main() {
 			if ints[0] == 19690720 {
 				fmt.Println("Noun and verb for part 2 are: ", x, y)
 				fmt.Println("100 * noun + verb: ", 100*x+y)
+				return
 			}
 		}
 	}
