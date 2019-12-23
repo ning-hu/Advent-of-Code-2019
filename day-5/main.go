@@ -29,18 +29,22 @@ func getModes(instn int) []int {
 func intcode(ints []int) {
 	i := 0
 	for ints[i] != 99 {
-		// mod 100 since mode is the tens and ones digit.
+		// To account for different modes, get the modes for the
+		// current instruction. Set the values in the params array
+		// so they are the index to the desired value in the ints
+		// array.
 		instn := ints[i]
 		modes, params := getModes(instn), []int{}
 		for j, mode := range modes {
 			switch mode {
-			case 1:
+			case 1: // treat the value at the param as the desired value
 				params = append(params, i+j+1)
-			default:
+			default: // treat the value at the param as an index to the desired value
 				params = append(params, ints[i+j+1])
 			}
 		}
 
+		// mod 100 since mode is the tens and ones digit.
 		switch instn % 100 {
 		case 1:
 			ints[params[2]] = ints[params[0]] + ints[params[1]]
@@ -76,7 +80,6 @@ func intcode(ints []int) {
 				i += 3
 			}
 		case 7:
-			// jump-if-less
 			if ints[params[0]] < ints[params[1]] {
 				ints[params[2]] = 1
 			} else {
@@ -84,7 +87,6 @@ func intcode(ints []int) {
 			}
 			i += 4
 		case 8:
-			// jump-if-equal
 			if ints[params[0]] == ints[params[1]] {
 				ints[params[2]] = 1
 			} else {

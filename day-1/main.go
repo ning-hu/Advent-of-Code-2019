@@ -37,9 +37,6 @@ func main() {
 		}
 	}
 
-	err = scanner.Err()
-	check(err)
-
 	fmt.Println("Sum for part 1: ", sum1)
 	fmt.Println("Sum for part 2: ", sum2)
 }
